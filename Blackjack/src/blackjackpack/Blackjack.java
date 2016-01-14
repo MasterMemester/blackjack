@@ -1,4 +1,5 @@
 package blackjackpack;
+
 import java.awt.*;
 import java.awt.event.*; //Import event libraries
 import javax.swing.*;
@@ -83,6 +84,7 @@ class blackjackWindo extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent event) {
 		int card;
+		
 		if (event.getSource() == drawButton) {
 			standButton.setEnabled(true);
 			drawcounter++;
@@ -91,12 +93,19 @@ class blackjackWindo extends JFrame implements ActionListener {
 
 				Stringcard = Drawcard();
 				card = carddraw();
+				if (playerTotal > 10 && card ==11){
+					card = 1;
+				}
+
 				playerTotal += card;
+				
 
 				if (playerTotal < 22) {
 					player.setText("" + playerTotal);
 				} else {
 					player.setText(" Bust ");
+					standButton.setEnabled(false);
+					drawButton.setEnabled(false);
 				}
 				if (drawcounter == 1) {
 					player1.setText("    " + Stringcard);
@@ -121,6 +130,9 @@ class blackjackWindo extends JFrame implements ActionListener {
 				counter++;
 				Stringcard = Drawcard();
 				card = carddraw();
+				if (playerTotal > 10 && card ==11){
+					card = 1;
+				}
 				dealerTotal += card;
 				if (counter == 1) {
 					player6.setText(Stringcard);
@@ -135,6 +147,7 @@ class blackjackWindo extends JFrame implements ActionListener {
 				}
 
 			}
+			
 			if (dealerTotal < 22) {
 				dealer.setText("" + dealerTotal);
 				if (playerTotal < dealerTotal)
